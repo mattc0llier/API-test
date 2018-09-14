@@ -1,0 +1,54 @@
+    body {
+      background: black;
+    }
+    
+    h1 {
+      display: block;
+      font-size: 3rem;
+      padding: 0 0 0 1rem;
+      color: white;
+    }
+
+    div {
+      border-style: none;
+    }
+
+    p {
+      display: block;
+    }
+
+    .prop {
+      font-weight: 700;
+    }
+
+    .character-name {
+      font-size: 1.5rem;
+      background: #606060;
+      color: white;
+      padding: 1.5rem 1rem;
+      margin: 1rem 0 0 0;
+    }
+
+  .character-other-props {
+    font-size: 1rem;
+    background: #f0f0f0;
+    color: black;
+    padding: 1rem;
+    margin: 0.2rem 0;
+  }
+
+  .loading-animation {
+    width: 268px;
+    height: 153px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid black;;
+    outline: 0; 
+    background-image: url("https://78.media.tumblr.com/d2342b740e8e3ac42f4fdef035ee5875/tumblr_on13malzLO1w34bgio8_r2_400.gif");
+    background-repeat: no-repeat;
+  }
+
+  .init-button {
+    font-size: 1rem;
+    padding: 1rem;
+  }

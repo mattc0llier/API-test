@@ -1,42 +1,55 @@
 const parentNode = document.querySelector("main");
+const loaderNode = document.querySelector(".loader");
+const buttonNode = document.querySelector(".init-button");
+const animation = document.createElement("img");
 
 function displayDataOnPage(starWarsCharacters) {
-  // const swObject = starWarsCharacters.results;
-  // swObject.forEach(function(n) {
-  //   console.log(n);
-  // });
-  // const keys = Object.keys(swObject);
-  // const charKeys = Object.keys(swObject[0]);
-  // keys.forEach(function(character) {
-  //   charKeys.forEach(function(props) {
-  //     // console.log();
-  //     const node = document.createElement("p");
-  //     node.innerHTML = `<b>${props}</b> : ${swObject[character][props]}`;
-  //     parentNode.appendChild(node);
-  //   });
-  // });
-  const swObject = starWarsCharacters.results;
-  const charKeys = Object.keys(swObject[0]);
-  swObject.forEach(function(character) {
+  parentNode.removeChild(animation);
+  const swArray = starWarsCharacters.results;
+  const charKeys = Object.keys(swArray[0]);
+  swArray.forEach(function(character) {
     charKeys.forEach(function(props) {
-      console.log(props);
-      const node = document.createElement("p");
-      node.innerHTML = `<b>${props}</b> : ${swObject[character][props]}`;
-      parentNode.appendChild(node);
+      const outputString = `<span class="prop">${props}</span> : ${character[props]}`;
+      const className = props === "name" ? "character-name" : "character-other-props";
+      createNode(outputString, className);
     });
   });
 }
 
-function displayErrorToUser() {}
+function displayErrorToUser(error) {
+  createNode(error);
+}
 
-fetch("https://swapi.co/api/people/") // by default fetch makes a GET request
+const loadAPI = function () {
+  fetch("https://swapi.co/api/people/") // by default fetch makes a GET request
   .then(function(response) {
     return response.json();
   })
   .then(function(body) {
-    //console.log(body);
     displayDataOnPage(body);
   })
   .catch(function(error) {
-    displayErrorToUser("Server failed to return data");
+    displayErrorToUser(error);
   });
+}
+
+/* 
+///////////////////////////////////
+*/
+
+const createNode = function (string, className="main") {
+  const node = document.createElement("p");
+  node.innerHTML = string;
+  node.className = className;
+  parentNode.appendChild(node);
+}
+
+function initLoader() {
+  animation.className = "loading-animation";
+  parentNode.appendChild(animation);
+}
+
+buttonNode.addEventListener("click", function (event) {
+  initLoader();
+  loadAPI();
+});
